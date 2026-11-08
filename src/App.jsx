@@ -1,9 +1,19 @@
-import HeatmapView from './heatmap/HeatmapPage';
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
-//import CommunityPage from './Community.jsx';
+import CommunityPage from './Community.jsx';
 import logo from './assets/firefly-logo.svg';
 import ReactMarkdown from 'react-markdown';
+
+// Loads the heat map if src/heatmap/HeatmapPage exists. If it is missing, the
+// site still works and shows a placeholder. Once the folder is there, you can
+// swap this back to: import HeatmapView from './heatmap/HeatmapPage';
+const heatmapModules = import.meta.glob('./heatmap/HeatmapPage.{js,jsx}', { eager: true });
+
+function HeatmapFallback() {
+  return <p>Heat map coming soon. Run git pull to get it.</p>;
+}
+
+const HeatmapView = Object.values(heatmapModules)[0]?.default || HeatmapFallback;
 
 
 function App() {
@@ -564,64 +574,6 @@ function HomePage({ onNavigate }) {
       </section>
 
     </div>
-  );
-}
-
-
-// COMMUNITY PAGE
-
-function CommunityPage() {
-  return (
-    <section className="content-page">
-      <p className="eyebrow">TOGETHER, WE ARE STRONGER</p>
-      <h1>Your voice. <span>Your community.</span></h1>
-      <p className="description">
-        A supportive space to share experiences, exchange advice
-        and help other women feel less alone.
-      </p>
-
-      <button className="primary-button">Create a Post +</button>
-
-      <div className="community-layout">
-        <div className="post-card">
-          <div className="post-user">
-            <div className="avatar">A</div>
-            <div>
-              <h3>Anonymous Member</h3>
-              <small>2 hours ago</small>
-            </div>
-          </div>
-          <h3>Tips for walking home safely?</h3>
-          <p>
-            I recently started taking the bus home later in the evening.
-            Does anyone have advice for staying aware and feeling safer?
-          </p>
-          <div className="post-actions">
-            <span>♡ 24 Support</span>
-            <span>☏ 8 Comments</span>
-          </div>
-        </div>
-
-        <div className="post-card">
-          <div className="post-user">
-            <div className="avatar">M</div>
-            <div>
-              <h3>Anonymous Member</h3>
-              <small>5 hours ago</small>
-            </div>
-          </div>
-          <h3>Looking out for each other</h3>
-          <p>
-            Remember that you deserve to feel comfortable and safe
-            in public spaces. Don't hesitate to ask for help.
-          </p>
-          <div className="post-actions">
-            <span>♡ 42 Support</span>
-            <span>☏ 12 Comments</span>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
