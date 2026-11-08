@@ -706,5 +706,46 @@ body {
   .recent-panel {
     grid-column: span 2;
   }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 420px;
+  }
+
+  .user-message {
+    align-self: flex-end;
+    max-width: 80%;
+    padding: 14px 18px;
+    border-radius: 20px;
+    background: #3a7d7a;
+    color: #fff;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .bot-message {
+    .bot-message p { margin: 0 0 10px; }
+    .bot-message ul,
+    .bot-message ol { margin: 6px 0 10px; padding-left: 22px; }
+    .bot-message li { margin-bottom: 6px; }
+    .bot-message h1,
+    .bot-message h2,
+    .bot-message h3 { font-size: 1.05rem; margin: 14px 0 6px; color: #8fd3b6; }
+    .bot-message strong { color: #fff; }
+    .bot-message > *:last-child { margin-bottom: 0; }
+  }
+
+  .typing {
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .chat-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 }

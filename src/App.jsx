@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CommunityPage from './Community.jsx';
 import logo from './assets/firefly-logo.svg';
+import ReactMarkdown from 'react-markdown';
+
 
 function App() {
   const [activePage, setActivePage] = useState('Home');
@@ -252,84 +254,202 @@ function HomePage({ onNavigate }) {
   );
 }
 
-// HEAT MAP PAGE
 
-function HeatMapPage() {
+// COMMUNITY PAGE
+
+function CommunityPage() {
   return (
     <section className="content-page">
-      <p className="eyebrow">KNOW YOUR SURROUNDINGS</p>
-
-      <h1>
-        Safety <span>Heat Map.</span>
-      </h1>
-
+      <p className="eyebrow">TOGETHER, WE ARE STRONGER</p>
+      <h1>Your voice. <span>Your community.</span></h1>
       <p className="description">
-        Explore community-reported safety concerns and identify
-        areas that may require greater attention.
+        A supportive space to share experiences, exchange advice
+        and help other women feel less alone.
       </p>
 
-      <div style={{ marginTop: '35px' }}>
-        <HeatmapView />
+      <button className="primary-button">Create a Post +</button>
+
+      <div className="community-layout">
+        <div className="post-card">
+          <div className="post-user">
+            <div className="avatar">A</div>
+            <div>
+              <h3>Anonymous Member</h3>
+              <small>2 hours ago</small>
+            </div>
+          </div>
+          <h3>Tips for walking home safely?</h3>
+          <p>
+            I recently started taking the bus home later in the evening.
+            Does anyone have advice for staying aware and feeling safer?
+          </p>
+          <div className="post-actions">
+            <span>♡ 24 Support</span>
+            <span>☏ 8 Comments</span>
+          </div>
+        </div>
+
+        <div className="post-card">
+          <div className="post-user">
+            <div className="avatar">M</div>
+            <div>
+              <h3>Anonymous Member</h3>
+              <small>5 hours ago</small>
+            </div>
+          </div>
+          <h3>Looking out for each other</h3>
+          <p>
+            Remember that you deserve to feel comfortable and safe
+            in public spaces. Don't hesitate to ask for help.
+          </p>
+          <div className="post-actions">
+            <span>♡ 42 Support</span>
+            <span>☏ 12 Comments</span>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 
+// HEAT MAP PAGE
+
+function HeatMapPage() {
+    return (
+        <section className="content-page">
+            <p className="eyebrow">KNOW YOUR SURROUNDINGS</p>
+
+            <h1>
+                Safety <span>Heat Map.</span>
+            </h1>
+
+            <p className="description">
+                Explore community-reported safety concerns and identify
+                areas that may require greater attention.
+            </p>
+
+            <div style={{ marginTop: '35px' }}>
+                <HeatmapView />
+            </div>
+        </section>
+    );
+}
+
+
 // FIREFLY CHAT PAGE
 
+const CHIPS = ['Walking alone at night', 'Public transit safety', 'How to report an incident'];
+
+const WELCOME = {
+  role: 'assistant',
+  content:
+      'Hi! Welcome to Firefly. How can I help you today? You can ask me about personal safety, public spaces or finding helpful resources.',
+};
+
 function ChatPage() {
+  const [messages, setMessages] = useState([WELCOME]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
+
+  async function sendMessage(text) {
+    const trimmed = text.trim();
+    if (!trimmed || loading) return;
+
+    const next = [...messages, { role: 'user', content: trimmed }];
+    setMessages(next);
+    setInput('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: next }),
+        signal: AbortSignal.timeout(25000),
+      });
+      const data = await res.json();
+      setMessages([
+        ...next,
+        {
+          role: 'assistant',
+          content: data.reply || "Sorry, something went wrong. If you're in danger, call 911.",
+        },
+      ]);
+    } catch {
+      setMessages([
+        ...next,
+        { role: 'assistant', content: "I couldn't connect just now. If you're in danger, call 911." },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    sendMessage(input);
+  }
+
+  const hasUserMessage = messages.some((m) => m.role === 'user');
+
   return (
-    <section className="content-page">
-      <p className="eyebrow">HERE WHEN YOU NEED US</p>
+      <section className="content-page">
+        <p className="eyebrow">HERE WHEN YOU NEED US</p>
+        <h1>Meet <span>Firefly Chat.</span></h1>
+        <p className="description">
+          Get practical safety guidance, helpful resources
+          and information for navigating uncomfortable situations.
+        </p>
 
-      <h1>
-        Meet <span>Firefly Chat.</span>
-      </h1>
-
-      <p className="description">
-        Get practical safety guidance, helpful resources
-        and information for navigating uncomfortable situations.
-      </p>
-
-      <div className="chat-window">
-
-        <div className="chat-header">
-          <span>✦</span>
-
-          <div>
-            <h3>Firefly Assistant</h3>
-            <small>Your supportive safety companion</small>
-          </div>
-        </div>
-
-        <div className="chat-messages">
-
-          <div className="bot-message">
-            Hi! Welcome to Firefly. How can I help you today?
-            You can ask me about personal safety, public spaces
-            or finding helpful resources.
+        <div className="chat-window">
+          <div className="chat-header">
+            <span>✦</span>
+            <div>
+              <h3>Firefly Assistant</h3>
+              <small>Your supportive safety companion</small>
+            </div>
           </div>
 
-          <div className="suggestions">
-            <button>Walking alone at night</button>
-            <button>Public transit safety</button>
-            <button>How to report an incident</button>
+          <div className="chat-messages">
+            {messages.map((m, i) => (
+                <div key={i} className={m.role === 'user' ? 'user-message' : 'bot-message'}>
+                  {m.role === 'user' ? m.content : <ReactMarkdown>{m.content}</ReactMarkdown>}
+                </div>
+            ))}
+
+            {loading && <div className="bot-message typing">Firefly is typing…</div>}
+
+            {!hasUserMessage && (
+                <div className="suggestions">
+                  {CHIPS.map((chip) => (
+                      <button key={chip} type="button" onClick={() => sendMessage(chip)}>
+                        {chip}
+                      </button>
+                  ))}
+                </div>
+            )}
+
+            <div ref={bottomRef} />
           </div>
 
+          <form className="chat-input" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Ask Firefly anything..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                disabled={loading}
+            />
+            <button type="submit" disabled={loading || !input.trim()}>↑</button>
+          </form>
         </div>
-
-        <div className="chat-input">
-          <input
-            type="text"
-            placeholder="Ask Firefly anything..."
-          />
-
-          <button>↑</button>
-        </div>
-
-      </div>
-    </section>
+      </section>
   );
 }
 
