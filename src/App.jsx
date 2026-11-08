@@ -1,3 +1,4 @@
+import HeatmapView from './heatmap/HeatmapPage';
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CommunityPage from './Community.jsx';
@@ -251,7 +252,6 @@ function HomePage({ onNavigate }) {
   );
 }
 
-
 // HEAT MAP PAGE
 
 function HeatMapPage() {
@@ -268,57 +268,8 @@ function HeatMapPage() {
         areas that may require greater attention.
       </p>
 
-      <div className="heatmap-layout">
-
-        <div className="map-panel">
-          <div className="map-label label-one">Riverside Park</div>
-          <div className="map-label label-two">Central District</div>
-          <div className="map-label label-three">University Area</div>
-
-          <div className="heat heat-one"></div>
-          <div className="heat heat-two"></div>
-          <div className="heat heat-three"></div>
-          <div className="heat heat-four"></div>
-
-          <span className="map-pin pin-one">!</span>
-          <span className="map-pin pin-two">!</span>
-          <span className="map-pin pin-three">!</span>
-          <span className="map-pin pin-four">!</span>
-          <span className="map-pin pin-five">!</span>
-        </div>
-
-        <div className="map-sidebar">
-          <h3>Map Legend</h3>
-
-          <p>
-            <span className="legend-dot green"></span>
-            Lower reported concerns
-          </p>
-
-          <p>
-            <span className="legend-dot purple"></span>
-            Moderate reported concerns
-          </p>
-
-          <p>
-            <span className="legend-dot gold"></span>
-            Higher reported concerns
-          </p>
-
-          <hr />
-
-          <h3>Recent Reports</h3>
-
-          <p>Harassment hotspot</p>
-          <small>Central Station · 5h ago</small>
-
-          <p>Unsafe transit stop</p>
-          <small>Maple & 8th · 4h ago</small>
-
-          <p>Poor street lighting</p>
-          <small>Riverside Park · 6h ago</small>
-        </div>
-
+      <div style={{ marginTop: '35px' }}>
+        <HeatmapView />
       </div>
     </section>
   );
