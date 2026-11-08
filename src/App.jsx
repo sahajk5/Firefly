@@ -443,14 +443,11 @@ function HomePage({ onNavigate }) {
           </p>
 
           <button
-            className="primary-button"
-            onClick={() => window.open(
-              'https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/edit?usp=sharing',
-              '_blank'
-            )}
-          >
-            Share a Safety Report →
-          </button>
+  className="primary-button"
+  onClick={() => onNavigate('Heat Map')}
+>
+  Share a Safety Report →
+</button>
 
         </div>
 
