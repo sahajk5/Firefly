@@ -55,7 +55,7 @@ function App() {
       </main>
 
       <footer>
-        <p>✦ Firefly — A little light goes a long way.</p>
+        <p>Firefly — A little light goes a long way.</p>
       </footer>
     </div>
   );
@@ -431,10 +431,10 @@ function HomePage({ onNavigate }) {
           </p>
 
           <h1>
-            Your Experiences<br />
-            Can Light the Way<br />
-            to <span>Safety.</span>
-          </h1>
+  <span className="headline-line gold">Your Experiences</span>{' '}
+  <span className="headline-line cream">Can Light</span>
+  <span className="headline-line sage">the Way to Safety.</span>
+</h1>
 
           <p className="description">
             A community where women's experiences become shared
