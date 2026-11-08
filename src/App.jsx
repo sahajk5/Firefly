@@ -1,10 +1,37 @@
+
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [activePage, setActivePage] = useState('Home');
+
+  const pages = ['Home', 'Community', 'Heat Map', 'Firefly Chat', 'About'];
+
+  function renderPage() {
+    if (activePage === 'Home') {
+      return <HomePage onNavigate={setActivePage} />;
+    }
+
+    if (activePage === 'Community') {
+      return <CommunityPage />;
+    }
+
+    if (activePage === 'Heat Map') {
+      return <HeatMapPage />;
+    }
+
+    if (activePage === 'Firefly Chat') {
+      return <ChatPage />;
+    }
+
+    if (activePage === 'About') {
+      return <AboutPage />;
+    }
+  }
+
   return (
     <div className="dashboard">
 
-      {/* Top navigation */}
       <nav className="navbar">
         <div className="logo">
           <span className="logo-icon">✦</span>
@@ -15,217 +42,340 @@ function App() {
         </div>
 
         <div className="nav-links">
-          <a href="#map">Map</a>
-          <a href="#report">Report</a>
-          <a href="#community">Community</a>
-          <a href="#tools">Safety Tools</a>
-          <a href="#about">About</a>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={activePage === page ? 'nav-link active' : 'nav-link'}
+              onClick={() => setActivePage(page)}
+            >
+              {page}
+            </button>
+          ))}
         </div>
 
-        <div className="nav-right">
-          <div className="search">⌕ <span>Search location...</span></div>
-          <span className="notification">♧</span>
-          <div className="profile">F</div>
-        </div>
+        <div className="profile">F</div>
       </nav>
 
-      {/* Main dashboard */}
-      <main className="main-grid">
+      <main className="page-container">
+        {renderPage()}
+      </main>
 
-        {/* Left introduction */}
-        <section className="intro">
+      <footer>
+        <p>✦ Firefly — A little light goes a long way.</p>
+      </footer>
+
+    </div>
+  );
+}
+
+
+// HOME PAGE
+
+function HomePage({ onNavigate }) {
+  return (
+    <div className="home-page">
+
+      <section className="home-welcome">
+        <div>
+          <p className="eyebrow">A COMMUNITY THAT LOOKS OUT FOR YOU</p>
+
           <h1>
             Real women.<br />
             Real experiences.<br />
             <span>Safer spaces.</span>
           </h1>
 
-          <p>Verified safety reports and community insights.</p>
+          <p className="description">
+            Together, we turn shared experiences into awareness,
+            support and safer communities.
+          </p>
 
-          <button className="report-button" id="report">
-            ✎ &nbsp; Report an Incident
+          <button
+            className="primary-button"
+            onClick={() => onNavigate('Heat Map')}
+          >
+            Explore Safety Map →
           </button>
+        </div>
 
-          <div className="stats">
+        <div className="welcome-decoration">✦</div>
+      </section>
+
+      <section className="home-stats">
+        <div>
+          <h2>12,548</h2>
+          <p>Community Reports</p>
+        </div>
+        <div>
+          <h2>8,932</h2>
+          <p>Community Members</p>
+        </div>
+        <div>
+          <h2>234</h2>
+          <p>Areas Identified</p>
+        </div>
+      </section>
+
+      <section className="home-features">
+        <h2>Your safety, all in one place.</h2>
+        <p>Explore the tools that make Firefly possible.</p>
+
+        <div className="feature-grid">
+
+          <div className="feature-card">
+            <span>⌖</span>
+            <h3>Safety Heat Map</h3>
+            <p>Discover community-reported safety concerns in different areas.</p>
+            <button onClick={() => onNavigate('Heat Map')}>
+              Explore Map →
+            </button>
+          </div>
+
+          <div className="feature-card">
+            <span>♡</span>
+            <h3>Community</h3>
+            <p>Share experiences, exchange advice and support one another.</p>
+            <button onClick={() => onNavigate('Community')}>
+              Join Community →
+            </button>
+          </div>
+
+          <div className="feature-card">
+            <span>✧</span>
+            <h3>Firefly Chat</h3>
+            <p>Find guidance and practical safety information when you need it.</p>
+            <button onClick={() => onNavigate('Firefly Chat')}>
+              Start Chatting →
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <section className="home-community">
+        <h2>You're not alone.</h2>
+        <p>A little light can make a safer world.</p>
+        <button
+          className="primary-button"
+          onClick={() => onNavigate('Community')}
+        >
+          Meet Your Community →
+        </button>
+      </section>
+
+    </div>
+  );
+}
+
+
+// COMMUNITY PAGE
+
+function CommunityPage() {
+  return (
+    <section className="content-page">
+      <p className="eyebrow">TOGETHER, WE ARE STRONGER</p>
+      <h1>Your voice. <span>Your community.</span></h1>
+      <p className="description">
+        A supportive space to share experiences, exchange advice
+        and help other women feel less alone.
+      </p>
+
+      <button className="primary-button">Create a Post +</button>
+
+      <div className="community-layout">
+        <div className="post-card">
+          <div className="post-user">
+            <div className="avatar">A</div>
             <div>
-              <h2>12,548</h2>
-              <p>Verified Reports</p>
-            </div>
-            <div>
-              <h2>8,932</h2>
-              <p>Active Users</p>
-            </div>
-            <div>
-              <h2>234</h2>
-              <p>Areas Improved</p>
+              <h3>Anonymous Member</h3>
+              <small>2 hours ago</small>
             </div>
           </div>
-        </section>
+          <h3>Tips for walking home safely?</h3>
+          <p>
+            I recently started taking the bus home later in the evening.
+            Does anyone have advice for staying aware and feeling safer?
+          </p>
+          <div className="post-actions">
+            <span>♡ 24 Support</span>
+            <span>☏ 8 Comments</span>
+          </div>
+        </div>
 
-        {/* Map */}
-        <section className="map-panel" id="map">
-          <div className="map-search">⌕ &nbsp; Your location <span>›</span></div>
+        <div className="post-card">
+          <div className="post-user">
+            <div className="avatar">M</div>
+            <div>
+              <h3>Anonymous Member</h3>
+              <small>5 hours ago</small>
+            </div>
+          </div>
+          <h3>Looking out for each other</h3>
+          <p>
+            Remember that you deserve to feel comfortable and safe
+            in public spaces. Don't hesitate to ask for help.
+          </p>
+          <div className="post-actions">
+            <span>♡ 42 Support</span>
+            <span>☏ 12 Comments</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
+
+// HEAT MAP PAGE
+
+function HeatMapPage() {
+  return (
+    <section className="content-page">
+      <p className="eyebrow">KNOW YOUR SURROUNDINGS</p>
+      <h1>Safety <span>Heat Map.</span></h1>
+      <p className="description">
+        Explore community-reported safety concerns and identify
+        areas that may require greater attention.
+      </p>
+
+      <div className="heatmap-layout">
+        <div className="map-panel">
           <div className="map-label label-one">Riverside Park</div>
-          <div className="map-label label-two">Central Office Park</div>
-          <div className="map-label label-three">Central Central</div>
-          <div className="map-label label-four">Riverdale Park</div>
+          <div className="map-label label-two">Central District</div>
+          <div className="map-label label-three">University Area</div>
 
           <div className="heat heat-one"></div>
           <div className="heat heat-two"></div>
           <div className="heat heat-three"></div>
           <div className="heat heat-four"></div>
-          <div className="heat heat-five"></div>
 
           <span className="map-pin pin-one">!</span>
           <span className="map-pin pin-two">!</span>
           <span className="map-pin pin-three">!</span>
           <span className="map-pin pin-four">!</span>
           <span className="map-pin pin-five">!</span>
-          <span className="map-pin pin-six">!</span>
-          <span className="map-pin pin-seven">!</span>
-          <span className="map-pin pin-eight">!</span>
-          <span className="map-pin pin-nine">!</span>
-          <span className="map-pin pin-ten">!</span>
+        </div>
 
-          <div className="map-controls">
-            <button>+</button>
-            <button>⌖</button>
-            <button>➤</button>
-          </div>
-        </section>
+        <div className="map-sidebar">
+          <h3>Map Legend</h3>
+          <p><span className="legend-dot green"></span> Lower reported concerns</p>
+          <p><span className="legend-dot purple"></span> Moderate reported concerns</p>
+          <p><span className="legend-dot gold"></span> Higher reported concerns</p>
 
-        {/* Heatmap legend */}
-        <section className="legend-panel">
-          <h3>Safety Heatmap</h3>
-          <div className="gradient-bar"></div>
-          <div className="risk-labels">
-            <span>Lower risk</span>
-            <span>Higher risk</span>
-          </div>
+          <hr />
 
-          <div className="legend-item"><span className="legend-icon yellow">!</span> Harassment hotspot</div>
-          <div className="legend-item"><span className="legend-icon purple">●</span> Unsafe transit stop</div>
-          <div className="legend-item"><span className="legend-icon gold">▤</span> Problem workplace</div>
-          <div className="legend-item"><span className="legend-icon green">✓</span> Verified report</div>
-        </section>
+          <h3>Recent Reports</h3>
+          <p>Harassment hotspot</p>
+          <small>Central Station · 5h ago</small>
 
-        {/* Recent reports */}
-        <section className="recent-panel">
-          <div className="section-heading">
-            <h3>Recent Verified Reports</h3>
-            <a href="#reports">View all →</a>
-          </div>
+          <p>Unsafe transit stop</p>
+          <small>Maple & 8th · 4h ago</small>
 
-          <div className="recent-report">
-            <span className="report-icon yellow">!</span>
-            <div>
-              <h4>Harassment hotspot</h4>
-              <p>Central Station</p>
-              <p>A group of men often stand and follow women on the south side after dark.</p>
-              <small>5h ago</small>
-              <span className="verified">✓ Verified</span>
-            </div>
-          </div>
+          <p>Poor street lighting</p>
+          <small>Riverside Park · 6h ago</small>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <div className="recent-report">
-            <span className="report-icon blue">●</span>
-            <div>
-              <h4>Unsafe transit stop</h4>
-              <p>Maple & 8th (Bus Stop)</p>
-              <p>Poor lighting, frequent loitering, and an unsafe walking area at night.</p>
-              <small>4h ago</small>
-              <span className="verified">✓ Verified</span>
-            </div>
-          </div>
 
-          <div className="recent-report">
-            <span className="report-icon gold">▤</span>
-            <div>
-              <h4>Problem workplace</h4>
-              <p>Riverside Office Park</p>
-              <p>Manager makes inappropriate comments and creates a hostile environment.</p>
-              <small>6h ago</small>
-              <span className="verified">✓ Verified</span>
-            </div>
-          </div>
-        </section>
+// FIREFLY CHAT PAGE
 
-        {/* Bottom cards */}
-        <section className="insights-card">
-          <h3>↗ &nbsp; Safety Insights</h3>
-          <h4>Top reported areas this month</h4>
+function ChatPage() {
+  return (
+    <section className="content-page">
+      <p className="eyebrow">HERE WHEN YOU NEED US</p>
+      <h1>Meet <span>Firefly Chat.</span></h1>
+      <p className="description">
+        Get practical safety guidance, helpful resources
+        and information for navigating uncomfortable situations.
+      </p>
 
-          {[
-            ['Central Station', '82%'],
-            ['Maple & 8th', '65%'],
-            ['Riverside Office Park', '55%'],
-            ['West End', '42%'],
-            ['University District', '34%']
-          ].map((place, index) => (
-            <div className="insight-row" key={place[0]}>
-              <span className="rank">{index + 1}</span>
-              <div className="insight-content">
-                <p>{place[0]}</p>
-                <div className="progress">
-                  <div style={{ width: place[1] }}></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </section>
-
-        <section className="example-card">
-          <h3>Example Report</h3>
-          <div className="anonymous">
-            <div className="avatar">A</div>
-            <div>
-              <h4>Anonymous</h4>
-              <small>2 hours ago</small>
-            </div>
-          </div>
-          <div className="stars">★★★★★</div>
-          <p>
-            I was walking home around 8:30 PM and a man started following me.
-            I said something and kept getting closer. I had to take a different
-            route to get away. This happens often near the station.
-          </p>
-          <div className="report-tags">
-            <span>● Harassment hotspot</span>
-            <span>⌖ Central Station</span>
-          </div>
-        </section>
-
-        <section className="impact-card" id="about">
-          <h3>♢ &nbsp; Safety for a Stronger Tomorrow</h3>
-          <p>
-            Verified reports help community organizations and local
-            authorities identify problem areas and take action — from
-            better lighting to increased patrols and safer transit.
-          </p>
-          <button>View Community Impact →</button>
-
-          <div className="impact-icons">
-            <span>♙<small>Police</small></span>
-            <span>♧<small>City Officials</small></span>
-            <span>▣<small>Transit</small></span>
-            <span>♧<small>Community</small></span>
-          </div>
-        </section>
-
-        <section className="community-card" id="community">
+      <div className="chat-window">
+        <div className="chat-header">
+          <span>✦</span>
           <div>
-            <h2>You're not alone.</h2>
-            <h3>Join our community.</h3>
-            <p>◇ &nbsp; Share experiences</p>
-            <p>◇ &nbsp; Get advice</p>
-            <p>◇ &nbsp; Support other women</p>
-            <button>Go to Community →</button>
+            <h3>Firefly Assistant</h3>
+            <small>Your supportive safety companion</small>
           </div>
-        </section>
+        </div>
 
-      </main>
-    </div>
+        <div className="chat-messages">
+          <div className="bot-message">
+            Hi! Welcome to Firefly. How can I help you today?
+            You can ask me about personal safety, public spaces
+            or finding helpful resources.
+          </div>
+
+          <div className="suggestions">
+            <button>Walking alone at night</button>
+            <button>Public transit safety</button>
+            <button>How to report an incident</button>
+          </div>
+        </div>
+
+        <div className="chat-input">
+          <input
+            type="text"
+            placeholder="Ask Firefly anything..."
+          />
+          <button>↑</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+// ABOUT PAGE
+
+function AboutPage() {
+  return (
+    <section className="content-page about-page">
+      <p className="eyebrow">THE STORY BEHIND FIREFLY</p>
+
+      <h1>A little light can make a <span>safer world.</span></h1>
+
+      <p className="description">
+        Firefly is a community-driven women's safety platform
+        designed to make women safer, more confident and better informed.
+      </p>
+
+      <div className="about-card">
+        <h2>Our Mission</h2>
+        <p>
+          Women already carry valuable safety knowledge: which bus
+          stop feels unsafe after dark, which streets are poorly lit
+          and which spaces make them uncomfortable. But this knowledge
+          is often scattered and difficult to access.
+        </p>
+        <p>
+          Firefly brings these experiences together through shared
+          reports, community support and accessible safety tools.
+        </p>
+      </div>
+
+      <div className="about-values">
+        <div>
+          <span>♡</span>
+          <h3>Community</h3>
+          <p>Creating spaces where women can support one another.</p>
+        </div>
+
+        <div>
+          <span>✦</span>
+          <h3>Awareness</h3>
+          <p>Turning shared experiences into meaningful insights.</p>
+        </div>
+
+        <div>
+          <span>⌖</span>
+          <h3>Action</h3>
+          <p>Helping identify areas that need attention and improvement.</p>
+        </div>
+      </div>
+    </section>
   );
 }
 
