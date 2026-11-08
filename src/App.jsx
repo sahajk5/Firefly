@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
@@ -107,7 +106,6 @@ function HomePage({ onNavigate }) {
   const [showStats, setShowStats] = useState(false);
   const statsRef = useRef(null);
 
-  // Detect when the statistics section enters the screen
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -128,53 +126,63 @@ function HomePage({ onNavigate }) {
 
   return (
     <div className="home-page">
+
       <section className="home-welcome">
-  <div>
-    <p className="eyebrow">LIGHT THE WAY. LOOK OUT FOR EACH OTHER.</p>
+        <div>
+          <p className="eyebrow">
+            LIGHT THE WAY. LOOK OUT FOR EACH OTHER.
+          </p>
 
-    <h1>
-  Your Experiences<br />
-  Can Light the Way<br />
-  to <span>Safety.</span>
-</h1>
+          <h1>
+            Your Experiences<br />
+            Can Light the Way<br />
+            to <span>Safety.</span>
+          </h1>
 
-    <p className="description">
-      A community where women's experiences become shared
-      knowledge, helping others recognize risks, find support,
-      and navigate their surroundings with greater confidence.
-    </p>
+          <p className="description">
+            A community where women's experiences become shared
+            knowledge, helping others recognize risks, find support,
+            and navigate their surroundings with greater confidence.
+          </p>
 
-    <button
-  className="primary-button"
-  onClick={() => window.open(
-    'https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/edit?usp=sharing',
-    '_blank'
-  )}
->
-  Share a Safety Report →
-</button>
-  </div>
+          <button
+            className="primary-button"
+            onClick={() => window.open(
+              'https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/edit?usp=sharing',
+              '_blank'
+            )}
+          >
+            Share a Safety Report →
+          </button>
+        </div>
 
-  <div className="welcome-decoration">✦</div>
-</section>
+        <div className="welcome-decoration">✦</div>
+      </section>
 
 
       <section className="home-stats" ref={statsRef}>
         <div>
-         <h2><AnimatedNumber target={12548} start={showStats} />+</h2>
+          <h2>
+            <AnimatedNumber target={12548} start={showStats} />+
+          </h2>
           <p>Community Reports</p>
         </div>
 
         <div>
-          <h2><AnimatedNumber target={8932} start={showStats} />+</h2>
+          <h2>
+            <AnimatedNumber target={8932} start={showStats} />+
+          </h2>
           <p>Community Members</p>
         </div>
 
         <div>
-          <h2><AnimatedNumber target={234} start={showStats} /></h2>
+          <h2>
+            <AnimatedNumber target={234} start={showStats} />
+          </h2>
           <p>Areas Identified</p>
         </div>
       </section>
+
 
       <section className="home-features">
         <h2>Your safety, all in one place.</h2>
@@ -185,7 +193,9 @@ function HomePage({ onNavigate }) {
           <div className="feature-card">
             <span>⌖</span>
             <h3>Safety Heat Map</h3>
-            <p>Discover community-reported safety concerns in different areas.</p>
+            <p>
+              Discover community-reported safety concerns in different areas.
+            </p>
             <button onClick={() => onNavigate('Heat Map')}>
               Explore Map →
             </button>
@@ -194,7 +204,9 @@ function HomePage({ onNavigate }) {
           <div className="feature-card">
             <span>♡</span>
             <h3>Community</h3>
-            <p>Share experiences, exchange advice and support one another.</p>
+            <p>
+              Share experiences, exchange advice and support one another.
+            </p>
             <button onClick={() => onNavigate('Community')}>
               Join Community →
             </button>
@@ -203,7 +215,9 @@ function HomePage({ onNavigate }) {
           <div className="feature-card">
             <span>✧</span>
             <h3>Firefly Chat</h3>
-            <p>Find guidance and practical safety information when you need it.</p>
+            <p>
+              Find guidance and practical safety information when you need it.
+            </p>
             <button onClick={() => onNavigate('Firefly Chat')}>
               Start Chatting →
             </button>
@@ -212,9 +226,11 @@ function HomePage({ onNavigate }) {
         </div>
       </section>
 
+
       <section className="home-community">
         <h2>You're not alone.</h2>
         <p>A little light can make a safer world.</p>
+
         <button
           className="primary-button"
           onClick={() => onNavigate('Community')}
@@ -234,15 +250,22 @@ function CommunityPage() {
   return (
     <section className="content-page">
       <p className="eyebrow">TOGETHER, WE ARE STRONGER</p>
-      <h1>Your voice. <span>Your community.</span></h1>
+
+      <h1>
+        Your voice. <span>Your community.</span>
+      </h1>
+
       <p className="description">
         A supportive space to share experiences, exchange advice
         and help other women feel less alone.
       </p>
 
-      <button className="primary-button">Create a Post +</button>
+      <button className="primary-button">
+        Create a Post +
+      </button>
 
       <div className="community-layout">
+
         <div className="post-card">
           <div className="post-user">
             <div className="avatar">A</div>
@@ -251,16 +274,20 @@ function CommunityPage() {
               <small>2 hours ago</small>
             </div>
           </div>
+
           <h3>Tips for walking home safely?</h3>
+
           <p>
             I recently started taking the bus home later in the evening.
             Does anyone have advice for staying aware and feeling safer?
           </p>
+
           <div className="post-actions">
             <span>♡ 24 Support</span>
             <span>☏ 8 Comments</span>
           </div>
         </div>
+
 
         <div className="post-card">
           <div className="post-user">
@@ -270,16 +297,20 @@ function CommunityPage() {
               <small>5 hours ago</small>
             </div>
           </div>
+
           <h3>Looking out for each other</h3>
+
           <p>
             Remember that you deserve to feel comfortable and safe
             in public spaces. Don't hesitate to ask for help.
           </p>
+
           <div className="post-actions">
             <span>♡ 42 Support</span>
             <span>☏ 12 Comments</span>
           </div>
         </div>
+
       </div>
     </section>
   );
@@ -292,13 +323,18 @@ function HeatMapPage() {
   return (
     <section className="content-page">
       <p className="eyebrow">KNOW YOUR SURROUNDINGS</p>
-      <h1>Safety <span>Heat Map.</span></h1>
+
+      <h1>
+        Safety <span>Heat Map.</span>
+      </h1>
+
       <p className="description">
         Explore community-reported safety concerns and identify
         areas that may require greater attention.
       </p>
 
       <div className="heatmap-layout">
+
         <div className="map-panel">
           <div className="map-label label-one">Riverside Park</div>
           <div className="map-label label-two">Central District</div>
@@ -318,13 +354,26 @@ function HeatMapPage() {
 
         <div className="map-sidebar">
           <h3>Map Legend</h3>
-          <p><span className="legend-dot green"></span> Lower reported concerns</p>
-          <p><span className="legend-dot purple"></span> Moderate reported concerns</p>
-          <p><span className="legend-dot gold"></span> Higher reported concerns</p>
+
+          <p>
+            <span className="legend-dot green"></span>
+            Lower reported concerns
+          </p>
+
+          <p>
+            <span className="legend-dot purple"></span>
+            Moderate reported concerns
+          </p>
+
+          <p>
+            <span className="legend-dot gold"></span>
+            Higher reported concerns
+          </p>
 
           <hr />
 
           <h3>Recent Reports</h3>
+
           <p>Harassment hotspot</p>
           <small>Central Station · 5h ago</small>
 
@@ -334,6 +383,7 @@ function HeatMapPage() {
           <p>Poor street lighting</p>
           <small>Riverside Park · 6h ago</small>
         </div>
+
       </div>
     </section>
   );
@@ -346,15 +396,21 @@ function ChatPage() {
   return (
     <section className="content-page">
       <p className="eyebrow">HERE WHEN YOU NEED US</p>
-      <h1>Meet <span>Firefly Chat.</span></h1>
+
+      <h1>
+        Meet <span>Firefly Chat.</span>
+      </h1>
+
       <p className="description">
         Get practical safety guidance, helpful resources
         and information for navigating uncomfortable situations.
       </p>
 
       <div className="chat-window">
+
         <div className="chat-header">
           <span>✦</span>
+
           <div>
             <h3>Firefly Assistant</h3>
             <small>Your supportive safety companion</small>
@@ -362,6 +418,7 @@ function ChatPage() {
         </div>
 
         <div className="chat-messages">
+
           <div className="bot-message">
             Hi! Welcome to Firefly. How can I help you today?
             You can ask me about personal safety, public spaces
@@ -373,6 +430,7 @@ function ChatPage() {
             <button>Public transit safety</button>
             <button>How to report an incident</button>
           </div>
+
         </div>
 
         <div className="chat-input">
@@ -380,8 +438,10 @@ function ChatPage() {
             type="text"
             placeholder="Ask Firefly anything..."
           />
+
           <button>↑</button>
         </div>
+
       </div>
     </section>
   );
@@ -393,30 +453,38 @@ function ChatPage() {
 function AboutPage() {
   return (
     <section className="content-page about-page">
+
       <p className="eyebrow">THE STORY BEHIND FIREFLY</p>
 
-      <h1>A little light can make a <span>safer world.</span></h1>
+      <h1>
+        A little light can make a <span>safer world.</span>
+      </h1>
 
       <p className="description">
         Firefly is a community-driven women's safety platform
         designed to make women safer, more confident and better informed.
       </p>
 
+
       <div className="about-card">
         <h2>Our Mission</h2>
+
         <p>
           Women already carry valuable safety knowledge: which bus
           stop feels unsafe after dark, which streets are poorly lit
           and which spaces make them uncomfortable. But this knowledge
           is often scattered and difficult to access.
         </p>
+
         <p>
           Firefly brings these experiences together through shared
           reports, community support and accessible safety tools.
         </p>
       </div>
 
+
       <div className="about-values">
+
         <div>
           <span>♡</span>
           <h3>Community</h3>
@@ -434,9 +502,51 @@ function AboutPage() {
           <h3>Action</h3>
           <p>Helping identify areas that need attention and improvement.</p>
         </div>
+
       </div>
+
+
+      {/* COMMUNITY SAFETY REPORT */}
+
+      <div className="report-section">
+
+        <p className="eyebrow">OUR COMMUNITY, OUR STORIES</p>
+
+        <h2>Firefly Community Safety Report</h2>
+
+        <p className="description">
+          Explore our community safety report and discover how
+          shared experiences can help create safer spaces.
+        </p>
+
+        <div className="report-document">
+          <iframe
+            src="https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/preview"
+            width="100%"
+            height="800"
+            title="Firefly Community Safety Report"
+            style={{
+              border: 'none',
+              borderRadius: '12px'
+            }}
+          ></iframe>
+        </div>
+
+        <button
+          className="primary-button"
+          onClick={() => window.open(
+            'https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/edit?usp=sharing',
+            '_blank'
+          )}
+        >
+          Open Full Report →
+        </button>
+
+      </div>
+
     </section>
   );
 }
+
 
 export default App;

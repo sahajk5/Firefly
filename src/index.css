@@ -646,4 +646,27 @@ footer {
   .map-panel {
     min-height: 330px;
   }
+  .report-section {
+  margin-top: 80px;
+  padding-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.report-section h2 {
+  margin-bottom: 15px;
+}
+
+.report-document {
+  width: 100%;
+  margin: 35px 0 25px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: white;
+}
+
+.report-document iframe {
+  display: block;
+  width: 100%;
+  min-height: 800px;
+}
 }
