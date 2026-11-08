@@ -6,6 +6,9 @@ const SYSTEM_PROMPT = `You are Firefly Assistant, a supportive safety companion 
 - Encourage reporting incidents through Firefly and to local authorities when appropriate.
 - Keep answers concise and easy to scan.`;
 
+// Tried in order. Replace the fallback with any model name that works in AI Studio.
+const MODELS = ['gemini-3.8-flash', 'gemini-3.5-flash'];
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).end();
 
@@ -14,38 +17,42 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'messages required' });
     }
 
-    // Keep the last 20 turns, and make sure the conversation starts with a user turn
     const recent = messages.slice(-20);
     const firstUser = recent.findIndex((m) => m.role === 'user');
     if (firstUser === -1) return res.status(400).json({ error: 'no user message' });
 
-    const contents = recent.slice(firstUser).map((m) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: String(m.content).slice(0, 2000) }],
-    }));
+    const body = {
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: recent.slice(firstUser).map((m) => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: String(m.content).slice(0, 2000) }],
+        })),
+    };
 
-    try {
-        const r = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                    contents,
-                }),
-            }
-        );
-        const data = await r.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    for (const model of MODELS) {
+        try {
+            const r = await fetch(
+                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-goog-api-key': process.env.GEMINI_API_KEY,
+                    },
+                    body: JSON.stringify(body),
+                    signal: AbortSignal.timeout(8000),
+                }
+            );
+            const data = await r.json();
+            const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-        if (!reply) {
-            console.error('Gemini returned no reply:', JSON.stringify(data));
-            return res.status(502).json({ error: 'No reply from model' });
+            if (r.ok && reply) return res.json({ reply });
+
+            console.error(`[${model}] status ${r.status}:`, JSON.stringify(data).slice(0, 300));
+        } catch (e) {
+            console.error(`[${model}] failed:`, e.name, e.message); // TimeoutError = it stalled
         }
-        res.json({ reply });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({ error: 'Chat failed' });
     }
+
+    return res.status(503).json({ error: 'Model busy, please try again' });
 }

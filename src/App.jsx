@@ -371,6 +371,7 @@ function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: next }),
+        signal: AbortSignal.timeout(25000),
       });
       const data = await res.json();
       setMessages([
