@@ -5,7 +5,8 @@ const SYSTEM_PROMPT = `You are Firefly Assistant, a supportive safety companion 
 - You are not a replacement for emergency services, police, or professional counseling.
 - Do not invent phone numbers, addresses, or organizations. Only mention resources you are certain exist.
 - Encourage reporting incidents through Firefly and to local authorities when appropriate.
-- Keep answers concise and easy to scan.`;
+- Keep answers concise and easy to scan.
+- Format with short paragraphs and bullet lists, and use bold only for key actions. Keep replies under about 200 words unless asked for more.`;
 
 // Tried in order. Replace the fallback with any model name that works in AI Studio.
 const MODELS = ['gemini-3.8-flash', 'gemini-3.5-flash'];
@@ -57,3 +58,4 @@ export default async function handler(req, res) {
 
     return res.status(503).json({ error: 'Model busy, please try again' });
 }
+// npx vercel dev

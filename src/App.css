@@ -727,7 +727,15 @@ body {
   }
 
   .bot-message {
-    white-space: pre-wrap;
+    .bot-message p { margin: 0 0 10px; }
+    .bot-message ul,
+    .bot-message ol { margin: 6px 0 10px; padding-left: 22px; }
+    .bot-message li { margin-bottom: 6px; }
+    .bot-message h1,
+    .bot-message h2,
+    .bot-message h3 { font-size: 1.05rem; margin: 14px 0 6px; color: #8fd3b6; }
+    .bot-message strong { color: #fff; }
+    .bot-message > *:last-child { margin-bottom: 0; }
   }
 
   .typing {

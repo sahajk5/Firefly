@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import ReactMarkdown from 'react-markdown';
 
 function App() {
   const [activePage, setActivePage] = useState('Home');
@@ -419,7 +420,7 @@ function ChatPage() {
           <div className="chat-messages">
             {messages.map((m, i) => (
                 <div key={i} className={m.role === 'user' ? 'user-message' : 'bot-message'}>
-                  {m.content}
+                  {m.role === 'user' ? m.content : <ReactMarkdown>{m.content}</ReactMarkdown>}
                 </div>
             ))}
 
