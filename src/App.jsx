@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const [activePage, setActivePage] = useState('Home');
 
-  const pages = ['Home', 'Heat Map', 'Firefly Chat', 'Community', 'About'];
+  const pages = ['Home', 'Heat Map', 'Firefly Chat', 'Community'];
 
   function renderPage() {
     if (activePage === 'Home') {
@@ -21,10 +21,6 @@ function App() {
 
     if (activePage === 'Firefly Chat') {
       return <ChatPage />;
-    }
-
-    if (activePage === 'About') {
-      return <AboutPage />;
     }
   }
 
@@ -763,107 +759,6 @@ function ChatPage() {
         </div>
 
       </div>
-    </section>
-  );
-}
-
-
-// ABOUT PAGE
-
-function AboutPage() {
-  return (
-    <section className="content-page about-page">
-
-      <p className="eyebrow">THE STORY BEHIND FIREFLY</p>
-
-      <h1>
-        A little light can make a <span>safer world.</span>
-      </h1>
-
-      <p className="description">
-        Firefly is a community-driven women's safety platform
-        designed to make women safer, more confident and better informed.
-      </p>
-
-
-      <div className="about-card">
-        <h2>Our Mission</h2>
-
-        <p>
-          Women already carry valuable safety knowledge: which bus
-          stop feels unsafe after dark, which streets are poorly lit
-          and which spaces make them uncomfortable. But this knowledge
-          is often scattered and difficult to access.
-        </p>
-
-        <p>
-          Firefly brings these experiences together through shared
-          reports, community support and accessible safety tools.
-        </p>
-      </div>
-
-
-      <div className="about-values">
-
-        <div>
-          <span>♡</span>
-          <h3>Community</h3>
-          <p>Creating spaces where women can support one another.</p>
-        </div>
-
-        <div>
-          <span>✦</span>
-          <h3>Awareness</h3>
-          <p>Turning shared experiences into meaningful insights.</p>
-        </div>
-
-        <div>
-          <span>⌖</span>
-          <h3>Action</h3>
-          <p>Helping identify areas that need attention and improvement.</p>
-        </div>
-
-      </div>
-
-
-      {/* COMMUNITY SAFETY REPORT */}
-
-      <div className="report-section">
-
-        <p className="eyebrow">OUR COMMUNITY, OUR STORIES</p>
-
-        <h2>Firefly Community Safety Report</h2>
-
-        <p className="description">
-          Explore our community safety report and discover how
-          shared experiences can help create safer spaces.
-        </p>
-
-        <div className="report-document">
-          <iframe
-            src="https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/preview"
-            width="100%"
-            height="800"
-            title="Firefly Community Safety Report"
-            style={{
-              border: 'none',
-              borderRadius: '12px'
-            }}
-          ></iframe>
-        </div>
-
-        <button
-          className="primary-button"
-          onClick={() => window.open(
-            'https://docs.google.com/document/d/1meVPW7mGAqzqI8m0PxF3MKkliYvZrIQiJLOQ4bK9fcU/edit?usp=sharing',
-            '_blank'
-          )}
-        >
-          Open Full Report →
-        </button>
-
-      </div>
-
     </section>
   );
 }
