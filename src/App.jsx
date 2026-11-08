@@ -128,32 +128,33 @@ function HomePage({ onNavigate }) {
 
   return (
     <div className="home-page">
-
       <section className="home-welcome">
-        <div>
-          <p className="eyebrow">A COMMUNITY THAT LOOKS OUT FOR YOU</p>
+  <div>
+    <p className="eyebrow">LIGHT THE WAY. LOOK OUT FOR EACH OTHER.</p>
 
-          <h1>
-            Real women.<br />
-            Real experiences.<br />
-            <span>Safer spaces.</span>
-          </h1>
+    <h1>
+  Your Experiences<br />
+  Can Light the Way<br />
+  to <span>Safety.</span>
+</h1>
 
-          <p className="description">
-            Together, we turn shared experiences into awareness,
-            support and safer communities.
-          </p>
+    <p className="description">
+      A community where women's experiences become shared
+      knowledge, helping others recognize risks, find support,
+      and navigate their surroundings with greater confidence.
+    </p>
 
-          <button
-            className="primary-button"
-            onClick={() => onNavigate('Heat Map')}
-          >
-            Explore Safety Map →
-          </button>
-        </div>
+    <button
+      className="primary-button"
+      onClick={() => onNavigate('Heat Map')}
+    >
+      Explore Safety Map →
+    </button>
+  </div>
 
-        <div className="welcome-decoration">✦</div>
-      </section>
+  <div className="welcome-decoration">✦</div>
+</section>
+
 
       <section className="home-stats" ref={statsRef}>
         <div>
