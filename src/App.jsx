@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const [activePage, setActivePage] = useState('Home');
 
-  const pages = ['Home', 'Community', 'Heat Map', 'Firefly Chat', 'About'];
+  const pages = ['Home', 'Heat Map', 'Firefly Chat', 'Community', 'About'];
 
   function renderPage() {
     if (activePage === 'Home') {
