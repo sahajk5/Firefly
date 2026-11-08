@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256" role="img" aria-label="Firefly logo">
+  <defs>
+    <!-- soft golden glow under the firefly -->
+    <radialGradient id="ffGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E3C788" stop-opacity="0.7"></stop>
+      <stop offset="100%" stop-color="#E3C788" stop-opacity="0"></stop>
+    </radialGradient>
+    <!-- keeps the glow inside the rounded square -->
+    <clipPath id="ffClip"><rect x="1" y="1" width="62" height="62" rx="14"></rect></clipPath>
+  </defs>
+
+  <g clip-path="url(#ffClip)">
+    <!-- night background -->
+    <rect x="1" y="1" width="62" height="62" rx="14" fill="#2B2650"></rect>
+
+    <!-- artwork is drawn in a 400-unit space, then scaled down to fit.
+         Every wing and the body start at the same point (250,155) under the head
+         and fan out at their own angle, so the shapes line up cleanly. -->
+    <g transform="translate(32 33) scale(0.148) translate(-190 -200)">
+      <circle cx="175" cy="270" r="175" fill="url(#ffGlow)"></circle>
+
+      <!-- glowing body, points down and left -->
+      <ellipse cx="337" cy="155" rx="87" ry="42" fill="#E3C788" transform="rotate(124 250 155)"></ellipse>
+
+      <!-- left wings -->
+      <ellipse cx="337" cy="155" rx="87" ry="40" fill="#9C90DA" transform="rotate(192 250 155)"></ellipse>
+      <ellipse cx="357" cy="155" rx="107" ry="29" fill="#F0ECFA" transform="rotate(170 250 155)"></ellipse>
+
+      <!-- right wings -->
+      <ellipse cx="345" cy="155" rx="95" ry="40" fill="#9C90DA" transform="rotate(60 250 155)"></ellipse>
+      <ellipse cx="357" cy="155" rx="107" ry="27" fill="#F0ECFA" transform="rotate(80 250 155)"></ellipse>
+
+      <!-- antennae -->
+      <path d="M251 112 Q257 76 244 40" fill="none" stroke="#F0ECFA" stroke-width="8" stroke-linecap="round"></path>
+      <path d="M281 133 Q318 112 356 120" fill="none" stroke="#F0ECFA" stroke-width="8" stroke-linecap="round"></path>
+
+      <!-- head -->
+      <circle cx="253" cy="145" r="36" fill="#F0ECFA"></circle>
+    </g>
+  </g>
+</svg>
