@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -67,7 +67,34 @@ function App() {
     </div>
   );
 }
+// ANIMATED NUMBERS
 
+function AnimatedNumber({ target }) {
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    const duration = 1800;
+    const startTime = Date.now();
+
+    const timer = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Smoothly slow down as the number reaches its target
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setNumber(Math.floor(target * easedProgress));
+
+      if (progress === 1) {
+        clearInterval(timer);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [target]);
+
+  return <>{number.toLocaleString()}</>;
+}
 
 // HOME PAGE
 
@@ -102,19 +129,19 @@ function HomePage({ onNavigate }) {
       </section>
 
       <section className="home-stats">
-        <div>
-          <h2>12,548</h2>
-          <p>Community Reports</p>
-        </div>
-        <div>
-          <h2>8,932</h2>
-          <p>Community Members</p>
-        </div>
-        <div>
-          <h2>234</h2>
-          <p>Areas Identified</p>
-        </div>
-      </section>
+  <div>
+    <h2><AnimatedNumber target={12548} /></h2>
+    <p>Community Reports</p>
+  </div>
+  <div>
+    <h2><AnimatedNumber target={8932} /></h2>
+    <p>Community Members</p>
+  </div>
+  <div>
+    <h2><AnimatedNumber target={234} /></h2>
+    <p>Areas Identified</p>
+  </div>
+</section>
 
       <section className="home-features">
         <h2>Your safety, all in one place.</h2>
