@@ -339,48 +339,116 @@ function HeatMapPage() {
 
 // FIREFLY CHAT PAGE
 
+const CHIPS = ['Walking alone at night', 'Public transit safety', 'How to report an incident'];
+
+const WELCOME = {
+  role: 'assistant',
+  content:
+      'Hi! Welcome to Firefly. How can I help you today? You can ask me about personal safety, public spaces or finding helpful resources.',
+};
+
 function ChatPage() {
+  const [messages, setMessages] = useState([WELCOME]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
+
+  async function sendMessage(text) {
+    const trimmed = text.trim();
+    if (!trimmed || loading) return;
+
+    const next = [...messages, { role: 'user', content: trimmed }];
+    setMessages(next);
+    setInput('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: next }),
+      });
+      const data = await res.json();
+      setMessages([
+        ...next,
+        {
+          role: 'assistant',
+          content: data.reply || "Sorry, something went wrong. If you're in danger, call 911.",
+        },
+      ]);
+    } catch {
+      setMessages([
+        ...next,
+        { role: 'assistant', content: "I couldn't connect just now. If you're in danger, call 911." },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    sendMessage(input);
+  }
+
+  const hasUserMessage = messages.some((m) => m.role === 'user');
+
   return (
-    <section className="content-page">
-      <p className="eyebrow">HERE WHEN YOU NEED US</p>
-      <h1>Meet <span>Firefly Chat.</span></h1>
-      <p className="description">
-        Get practical safety guidance, helpful resources
-        and information for navigating uncomfortable situations.
-      </p>
+      <section className="content-page">
+        <p className="eyebrow">HERE WHEN YOU NEED US</p>
+        <h1>Meet <span>Firefly Chat.</span></h1>
+        <p className="description">
+          Get practical safety guidance, helpful resources
+          and information for navigating uncomfortable situations.
+        </p>
 
-      <div className="chat-window">
-        <div className="chat-header">
-          <span>✦</span>
-          <div>
-            <h3>Firefly Assistant</h3>
-            <small>Your supportive safety companion</small>
-          </div>
-        </div>
-
-        <div className="chat-messages">
-          <div className="bot-message">
-            Hi! Welcome to Firefly. How can I help you today?
-            You can ask me about personal safety, public spaces
-            or finding helpful resources.
+        <div className="chat-window">
+          <div className="chat-header">
+            <span>✦</span>
+            <div>
+              <h3>Firefly Assistant</h3>
+              <small>Your supportive safety companion</small>
+            </div>
           </div>
 
-          <div className="suggestions">
-            <button>Walking alone at night</button>
-            <button>Public transit safety</button>
-            <button>How to report an incident</button>
-          </div>
-        </div>
+          <div className="chat-messages">
+            {messages.map((m, i) => (
+                <div key={i} className={m.role === 'user' ? 'user-message' : 'bot-message'}>
+                  {m.content}
+                </div>
+            ))}
 
-        <div className="chat-input">
-          <input
-            type="text"
-            placeholder="Ask Firefly anything..."
-          />
-          <button>↑</button>
+            {loading && <div className="bot-message typing">Firefly is typing…</div>}
+
+            {!hasUserMessage && (
+                <div className="suggestions">
+                  {CHIPS.map((chip) => (
+                      <button key={chip} type="button" onClick={() => sendMessage(chip)}>
+                        {chip}
+                      </button>
+                  ))}
+                </div>
+            )}
+
+            <div ref={bottomRef} />
+          </div>
+
+          <form className="chat-input" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Ask Firefly anything..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                disabled={loading}
+            />
+            <button type="submit" disabled={loading || !input.trim()}>↑</button>
+          </form>
         </div>
-      </div>
-    </section>
+      </section>
   );
 }
 

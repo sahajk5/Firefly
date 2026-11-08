@@ -706,5 +706,38 @@ body {
   .recent-panel {
     grid-column: span 2;
   }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 420px;
+  }
+
+  .user-message {
+    align-self: flex-end;
+    max-width: 80%;
+    padding: 14px 18px;
+    border-radius: 20px;
+    background: #3a7d7a;
+    color: #fff;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .bot-message {
+    white-space: pre-wrap;
+  }
+
+  .typing {
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .chat-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 }
