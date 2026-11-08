@@ -553,8 +553,33 @@ function HomePage({ onNavigate }) {
             ))}
           </div>
 
-          {/* BOX 2: empty, fill in later */}
-          <div className="feature-box"></div>
+          {/* BOX 2: mission + values */}
+          <div className="feature-box">
+            <div className="feature-item">
+              <h3>Our Mission</h3>
+              <p>
+                Women already carry valuable safety knowledge, but it's
+                scattered and hard to find. Firefly brings these experiences
+                together through shared reports, community support and
+                accessible safety tools.
+              </p>
+            </div>
+
+            <div className="feature-item">
+              <h3>Community</h3>
+              <p>Creating spaces where women can support one another.</p>
+            </div>
+
+            <div className="feature-item">
+              <h3>Awareness</h3>
+              <p>Turning shared experiences into meaningful insights.</p>
+            </div>
+
+            <div className="feature-item">
+              <h3>Action</h3>
+              <p>Helping identify areas that need attention and improvement.</p>
+            </div>
+          </div>
 
           {/* BOX 3: empty, fill in later */}
           <div className="feature-box"></div>
