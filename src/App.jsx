@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -67,20 +67,24 @@ function App() {
     </div>
   );
 }
+
+
 // ANIMATED NUMBERS
 
-function AnimatedNumber({ target }) {
+function AnimatedNumber({ target, start }) {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
+    if (!start) {
+      return;
+    }
+
     const duration = 1800;
     const startTime = Date.now();
 
     const timer = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-
-      // Smoothly slow down as the number reaches its target
       const easedProgress = 1 - Math.pow(1 - progress, 3);
 
       setNumber(Math.floor(target * easedProgress));
@@ -91,14 +95,37 @@ function AnimatedNumber({ target }) {
     }, 16);
 
     return () => clearInterval(timer);
-  }, [target]);
+  }, [start, target]);
 
-  return <>{number.toLocaleString()}</>;
+  return <span>{number.toLocaleString()}</span>;
 }
+
 
 // HOME PAGE
 
 function HomePage({ onNavigate }) {
+  const [showStats, setShowStats] = useState(false);
+  const statsRef = useRef(null);
+
+  // Detect when the statistics section enters the screen
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowStats(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="home-page">
 
@@ -128,20 +155,22 @@ function HomePage({ onNavigate }) {
         <div className="welcome-decoration">✦</div>
       </section>
 
-      <section className="home-stats">
-  <div>
-    <h2><AnimatedNumber target={12548} /></h2>
-    <p>Community Reports</p>
-  </div>
-  <div>
-    <h2><AnimatedNumber target={8932} /></h2>
-    <p>Community Members</p>
-  </div>
-  <div>
-    <h2><AnimatedNumber target={234} /></h2>
-    <p>Areas Identified</p>
-  </div>
-</section>
+      <section className="home-stats" ref={statsRef}>
+        <div>
+         <h2><AnimatedNumber target={12548} start={showStats} />+</h2>
+          <p>Community Reports</p>
+        </div>
+
+        <div>
+          <h2><AnimatedNumber target={8932} start={showStats} />+</h2>
+          <p>Community Members</p>
+        </div>
+
+        <div>
+          <h2><AnimatedNumber target={234} start={showStats} /></h2>
+          <p>Areas Identified</p>
+        </div>
+      </section>
 
       <section className="home-features">
         <h2>Your safety, all in one place.</h2>
