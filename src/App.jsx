@@ -99,7 +99,6 @@ function AnimatedNumber({ target, start }) {
 
 
 // EXAMPLE REPORT CARD ARTWORK
-// (swap these for real photos any time, see the notes in the reply)
 
 function AvatarFace() {
   return (
@@ -580,9 +579,6 @@ function HomePage({ onNavigate }) {
               <p>Helping identify areas that need attention and improvement.</p>
             </div>
           </div>
-
-          {/* BOX 3: empty, fill in later */}
-          <div className="feature-box"></div>
 
         </div>
       </section>
