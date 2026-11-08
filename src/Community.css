@@ -1,35 +1,22 @@
-/* Fonts for the Community page. Delete this line to fall back to the site font. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Young+Serif&display=swap');
-
-/* Calm night with soft lights. Colors come from the Firefly theme. */
+/* Community page. Colors, font and card style match the rest of the Firefly site. */
 .cm-page {
-  --night: #3a2c63; /* violet: the sky */
-  --plum: #1f1a33; /* cards and screens */
-  --plum-raised: #2a2346; /* inputs and hover surfaces on plum */
-  --line: rgba(187, 168, 245, 0.2);
-  --text: #f3eefb;
-  --muted: #bdb4d6;
-  --butter: #e0c187; /* new things, highlights */
-  --sage: #93d3b8; /* help is needed, community */
-  --lavender: #bba8f5; /* verified, safer, together */
-  --teal: #3f7a77; /* main buttons */
+  --card: #292433; /* same as the site's cards */
+  --card-raised: #393044; /* same as the site's raised cards */
+  --input: #211e2b; /* same as the site's chat input */
+  --line: #514451; /* same as the site's card borders */
+  --text: #f5eadd;
+  --body: #d4cce0;
+  --muted: #b7aabd;
+  --butter: #e0c187;
+  --sage: #93d3b8;
+  --lavender: #bba8f5;
+  --teal: #3f7a77;
   --blush: #f6ceda;
   --sky: #a9cce0;
 
-  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --font-display: 'Young Serif', Georgia, 'Times New Roman', serif;
-
-  font-family: var(--font-body);
-  color: var(--text);
+  font-size: 14px;
+  color: var(--body);
   line-height: 1.5;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 28px 24px 64px;
-  background:
-    radial-gradient(900px 420px at 15% -5%, rgba(187, 168, 245, 0.16), transparent 70%),
-    radial-gradient(700px 380px at 95% 8%, rgba(147, 211, 184, 0.09), transparent 70%),
-    var(--night);
-  border-radius: 28px;
 }
 
 .cm-page *,
@@ -53,14 +40,6 @@
 
 .cm-page button:disabled {
   cursor: not-allowed;
-}
-
-.cm-page h1,
-.cm-page h2,
-.cm-page p,
-.cm-page ul {
-  margin: 0;
-  padding: 0;
 }
 
 .cm-page ul {
@@ -89,36 +68,23 @@
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  margin-bottom: 28px;
 }
 
-.cm-header h1 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(30px, 4.2vw, 44px);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--text);
+.cm-header .description {
+  margin-bottom: 30px;
 }
 
-.cm-header p {
-  margin-top: 8px;
-  color: var(--muted);
-  max-width: 52ch;
-}
-
-.cm-page .cm-privacy-note {
+.cm-header .cm-privacy-note {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0;
-  padding: 9px 14px;
+  margin: 0 0 32px;
+  padding: 10px 16px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(31, 26, 51, 0.55);
-  color: var(--lavender);
-  font-size: 14px;
-  max-width: none;
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--sage);
+  font-size: 12px;
 }
 
 /* ---------------- Grid ---------------- */
@@ -133,7 +99,7 @@
 .cm-left,
 .cm-right {
   position: sticky;
-  top: 90px;
+  top: 95px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -158,32 +124,25 @@
   text-align: left;
   padding: 11px 16px;
   border: 0;
-  border-radius: 14px;
+  border-radius: 20px;
   background: transparent;
-  color: var(--muted);
-  font-weight: 500;
+  color: #ded7e5;
+  font-size: 13px;
   transition: background 0.15s, color 0.15s;
 }
 
-.cm-tab:hover {
-  background: rgba(31, 26, 51, 0.5);
-  color: var(--text);
-}
-
+.cm-tab:hover,
 .cm-tab.is-on {
-  background: var(--plum);
+  background: #493b5a;
   color: var(--butter);
-  font-weight: 700;
-  box-shadow: inset 3px 0 0 var(--butter);
 }
 
 .cm-circles h2,
 .cm-panel h2,
 .cm-guidelines h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 18px;
-  margin-bottom: 12px;
+  font-size: 15px;
+  color: var(--butter);
+  margin-bottom: 14px;
 }
 
 .cm-circles ul {
@@ -207,7 +166,7 @@
 }
 
 .cm-circle:hover {
-  background: rgba(31, 26, 51, 0.5);
+  background: rgba(73, 59, 90, 0.5);
 }
 
 .cm-circle-bubble {
@@ -217,7 +176,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--plum);
+  background: var(--card);
   color: var(--lavender);
   border: 2px solid var(--line);
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
@@ -253,10 +212,9 @@
   gap: 4px 12px;
   align-items: center;
   padding: 18px;
-  border-radius: 22px 22px 22px 6px;
-  background: var(--plum);
-  border: 1px solid rgba(224, 193, 135, 0.45);
-  box-shadow: 0 0 26px rgba(224, 193, 135, 0.12);
+  border-radius: 15px;
+  background: var(--card);
+  border: 1px solid rgba(224, 193, 135, 0.5);
 }
 
 .cm-help > svg {
@@ -265,7 +223,7 @@
 
 .cm-help p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-help .cm-btn {
@@ -280,10 +238,11 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 10px 18px;
+  padding: 12px 22px;
   border: 1px solid transparent;
-  border-radius: 12px;
-  font-weight: 700;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: bold;
   text-decoration: none;
   line-height: 1.2;
   transition: background 0.15s, opacity 0.15s, transform 0.1s;
@@ -299,7 +258,7 @@
 }
 
 .cm-btn-primary:hover:not(:disabled) {
-  background: #4a8b88;
+  background: #55958b;
 }
 
 .cm-btn-primary:disabled {
@@ -307,8 +266,8 @@
 }
 
 .cm-btn-soft {
-  padding: 7px 13px;
-  font-size: 14px;
+  padding: 7px 14px;
+  font-size: 12px;
   background: rgba(187, 168, 245, 0.14);
   color: var(--lavender);
   border-color: rgba(187, 168, 245, 0.35);
@@ -368,9 +327,9 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 20px;
-  border-radius: 26px;
-  background: var(--plum);
+  padding: 22px;
+  border-radius: 15px;
+  background: var(--card);
   border: 1px solid var(--line);
   transition: box-shadow 0.2s, border-color 0.2s;
 }
@@ -388,8 +347,8 @@
   border: 0;
   background: transparent;
   color: var(--text);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .cm-composer textarea:focus {
@@ -411,11 +370,10 @@
 .cm-chip {
   padding: 6px 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 20px;
   background: transparent;
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
 }
 
 .cm-chip:hover {
@@ -441,7 +399,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -449,16 +407,16 @@
   padding: 7px 28px 7px 12px;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: var(--plum-raised);
+  background: var(--input);
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .cm-check {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
   cursor: pointer;
 }
@@ -474,7 +432,7 @@
   padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--plum-raised);
+  background: var(--input);
   color: var(--text);
 }
 
@@ -534,7 +492,7 @@
 
 .cm-switch-text small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 /* ---------------- Urgent banner ---------------- */
@@ -556,8 +514,8 @@
 }
 
 .cm-urgent p {
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--body);
+  font-size: 12px;
 }
 
 .cm-urgent-actions {
@@ -573,9 +531,9 @@
 /* ---------------- Post card ---------------- */
 
 .cm-post {
-  padding: 20px 22px 14px;
-  border-radius: 22px;
-  background: var(--plum);
+  padding: 25px 25px 14px;
+  border-radius: 15px;
+  background: var(--card);
   border: 1px solid var(--line);
 }
 
@@ -606,12 +564,13 @@
 }
 
 .cm-post-who strong {
-  font-size: 16px;
+  font-size: 14px;
+  color: var(--text);
 }
 
 .cm-post-who span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .cm-pending {
@@ -619,8 +578,7 @@
   align-items: center;
   gap: 6px;
   color: var(--sage);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
 }
 
 /* Avatars: a dim glow is anonymous, a bright glow is someone you know. */
@@ -647,8 +605,8 @@
 }
 
 .cm-avatar-dim {
-  background: radial-gradient(circle at 50% 40%, #4a4073, #2c2547);
-  color: #9d94ba;
+  background: #40334e;
+  color: var(--muted);
   border: 1px solid rgba(187, 168, 245, 0.25);
 }
 
@@ -677,10 +635,9 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 11px;
   border: 1px solid transparent;
 }
 
@@ -727,8 +684,9 @@
 }
 
 .cm-post-text {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--body);
   max-width: 68ch;
 }
 
@@ -739,7 +697,7 @@
   margin-top: 12px;
   padding: 14px 16px;
   border-radius: 14px;
-  background: var(--plum-raised);
+  background: var(--card-raised);
 }
 
 .cm-checklist li {
@@ -763,7 +721,7 @@
   gap: 14px;
   padding: 16px;
   border-radius: 14px;
-  background: var(--plum-raised);
+  background: var(--card-raised);
   border: 1px dashed rgba(187, 168, 245, 0.45);
 }
 
@@ -773,7 +731,7 @@
 
 .cm-cw p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Map link */
@@ -788,7 +746,8 @@
   border: 1px solid var(--line);
   border-radius: 12px;
   background: transparent;
-  color: var(--text);
+  color: var(--body);
+  font-size: 13px;
   text-align: left;
 }
 
@@ -804,7 +763,7 @@
 
 .cm-map-link strong {
   color: var(--sage);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-map-link:hover {
@@ -839,10 +798,10 @@
   gap: 7px;
   padding: 8px 12px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 20px;
   background: transparent;
-  color: var(--muted);
-  font-weight: 500;
+  color: var(--sage);
+  font-size: 12px;
   transition: background 0.15s, color 0.15s;
 }
 
@@ -851,8 +810,7 @@
 }
 
 .cm-action:hover {
-  background: rgba(187, 168, 245, 0.12);
-  color: var(--text);
+  background: rgba(147, 211, 184, 0.1);
 }
 
 .cm-action.is-on {
@@ -874,7 +832,7 @@
   min-width: 200px;
   padding: 6px;
   border-radius: 14px;
-  background: var(--plum-raised);
+  background: var(--card-raised);
   border: 1px solid var(--line);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
@@ -924,7 +882,7 @@
   min-width: 0;
   padding: 10px 14px;
   border-radius: 6px 16px 16px 16px;
-  background: var(--plum-raised);
+  background: var(--card-raised);
 }
 
 .cm-comment-head {
@@ -940,13 +898,14 @@
 
 .cm-comment-body p {
   margin-top: 2px;
-  font-size: 15px;
+  font-size: 13px;
+  color: var(--body);
 }
 
 .cm-comments-empty {
   margin-bottom: 12px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-comment-form {
@@ -961,7 +920,7 @@
   padding: 10px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--plum-raised);
+  background: var(--card-raised);
   color: var(--text);
 }
 
@@ -972,9 +931,9 @@
 /* ---------------- Right sidebar ---------------- */
 
 .cm-panel {
-  padding: 18px;
-  border-radius: 20px;
-  background: var(--plum);
+  padding: 22px;
+  border-radius: 15px;
+  background: var(--card);
   border: 1px solid var(--line);
 }
 
@@ -993,14 +952,13 @@
   border-radius: 999px;
   background: var(--butter);
   color: #2a2110;
-  font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .cm-muted {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-people {
@@ -1039,21 +997,21 @@
 }
 
 .cm-guidelines {
-  padding: 18px 18px 16px;
-  border-radius: 20px 20px 6px 20px;
-  background: var(--blush);
-  color: #3a2c4a;
+  padding: 22px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #f6ceda, #f7e2dc);
+  color: #533b55;
 }
 
 .cm-guidelines h2 {
-  color: #2d2145;
+  color: #9c6580;
 }
 
 .cm-guidelines ul {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-guidelines li {
@@ -1074,7 +1032,7 @@
 
 .cm-empty {
   padding: 36px 20px;
-  border-radius: 22px;
+  border-radius: 15px;
   border: 1px dashed var(--line);
   color: var(--muted);
   text-align: center;
@@ -1093,7 +1051,7 @@
   max-width: calc(100vw - 32px);
   padding: 12px 18px;
   border-radius: 14px;
-  background: var(--plum);
+  background: var(--card);
   color: var(--text);
   border: 1px solid rgba(224, 193, 135, 0.5);
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5), 0 0 22px rgba(224, 193, 135, 0.15);
@@ -1167,7 +1125,7 @@
     width: 58px;
     height: 58px;
     border-width: 2px;
-    background: var(--plum);
+    background: var(--card);
   }
 
   .cm-circle-name {
@@ -1191,11 +1149,10 @@
     flex: none;
     padding: 9px 18px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: 20px;
   }
 
   .cm-tab.is-on {
-    box-shadow: none;
     border-color: var(--butter);
   }
 

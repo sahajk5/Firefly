@@ -756,11 +756,16 @@ export default function CommunityPage({ onNavigate = () => {} }) {
         : 'Nothing here yet. Be the first to post.';
 
   return (
-    <div className="cm-page">
+    <div className="cm-page content-page">
       <header className="cm-header">
         <div>
-          <h1>Your voice. Your community.</h1>
-          <p>Share what happened, ask what you are unsure about, and help another woman feel less alone.</p>
+          <p className="eyebrow">TOGETHER, WE ARE STRONGER</p>
+          <h1>
+            Your voice. <span>Your community.</span>
+          </h1>
+          <p className="description">
+            A supportive space to share experiences, exchange advice and help other women feel less alone.
+          </p>
         </div>
         <p className="cm-privacy-note">
           <Lock size={16} aria-hidden="true" />
