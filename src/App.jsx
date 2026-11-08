@@ -100,45 +100,6 @@ function AnimatedNumber({ target, start }) {
 
 // EXAMPLE REPORT CARD ARTWORK
 
-function AvatarFace() {
-  return (
-    <svg viewBox="0 0 40 40" width="100%" height="100%" aria-hidden="true">
-      <rect width="40" height="40" fill="#c9ced6" />
-      <path d="M6 40c1-9 7-12 14-12s13 3 14 12z" fill="#23232b" />
-      <rect x="17" y="24" width="6" height="6" rx="2" fill="#e3bfa3" />
-      <ellipse cx="20" cy="17" rx="8" ry="9" fill="#e8c9ae" />
-      <path d="M11 18c-1-9 4-13 9-13s10 4 9 13c-1-5-4-8-9-8s-8 3-9 8z" fill="#17151c" />
-      <path d="M11 17c0 6 1 10 3 12-1-5-1-8-1-12zM29 17c0 6-1 10-3 12 1-5 1-8 1-12z" fill="#17151c" />
-    </svg>
-  );
-}
-
-function ThumbPhoto() {
-  return (
-    <svg viewBox="0 0 80 76" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="hall" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#6f5a3c" />
-          <stop offset="0.55" stopColor="#b8935a" />
-          <stop offset="1" stopColor="#3d3226" />
-        </linearGradient>
-        <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
-          <stop offset="0" stopColor="#f1d9a0" stopOpacity="0.85" />
-          <stop offset="1" stopColor="#f1d9a0" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="80" height="76" fill="url(#hall)" />
-      <rect width="80" height="76" fill="url(#glow)" />
-      <path d="M6 60V22q6-12 12 0v38zM62 60V22q6-12 12 0v38z" fill="#4a3b2a" opacity="0.75" />
-      <path d="M28 60V18q12-14 24 0v42z" fill="#d9bb82" opacity="0.55" />
-      <rect x="0" y="58" width="80" height="18" fill="#2a2119" />
-      <circle cx="40" cy="26" r="5" fill="#d9b08c" />
-      <path d="M33 34q7-3 14 0l3 28H30z" fill="#14121a" />
-      <path d="M38 34l2 8 2-8z" fill="#e9e4ea" />
-    </svg>
-  );
-}
-
 function ShieldBadge() {
   return (
     <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
@@ -163,15 +124,16 @@ function PinIcon() {
 const reviews = [
   {
     name: 'Anonymous',
+    initial: 'S',
     time: '2 hours ago',
     stars: 4.5,
     text: 'I was walking home around 8:30 PM and a man started following me. He said something and kept getting closer. I had to take a different route to get away. This happens often near the station.',
     chip: 'Harassment hotspot',
-    location: 'Central Station',
-    photo: true
+    location: 'Central Station'
   },
   {
     name: 'Anonymous',
+    initial: 'M',
     time: 'Yesterday',
     stars: 5,
     text: 'The bus stop near the mall felt safe at night. There were other people around and the area was well lit.',
@@ -180,6 +142,7 @@ const reviews = [
   },
   {
     name: 'Anonymous',
+    initial: 'P',
     time: '2 days ago',
     stars: 3.5,
     text: 'The path behind the parking lot has no lighting after dark. I now take the longer route on the main road instead.',
@@ -188,6 +151,7 @@ const reviews = [
   },
   {
     name: 'Anonymous',
+    initial: 'J',
     time: '4 days ago',
     stars: 4,
     text: 'A staff member checked in when I looked uncomfortable waiting alone. It made a big difference.',
@@ -196,6 +160,7 @@ const reviews = [
   },
   {
     name: 'Anonymous',
+    initial: 'A',
     time: 'Last week',
     stars: 2.5,
     text: 'The stop is isolated and the shelter light is broken. I would not wait here alone after 9 PM.',
@@ -204,6 +169,7 @@ const reviews = [
   },
   {
     name: 'Anonymous',
+    initial: 'L',
     time: 'Last week',
     stars: 5,
     text: 'Sometimes knowing someone else has experienced the same thing makes all the difference.',
@@ -229,15 +195,10 @@ function ReviewCard({ review, showTitle, className = '' }) {
 
       {showTitle && <h3 className="report-title">Reviews</h3>}
 
-      {review.photo && (
-        <div className="report-thumb">
-          <ThumbPhoto />
-        </div>
-      )}
 
       <div className="report-user">
-        <div className="report-avatar">
-          <AvatarFace />
+        <div className="report-avatar" aria-hidden="true">
+          {review.initial}
         </div>
 
         <div className="report-user-text">

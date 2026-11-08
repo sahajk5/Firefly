@@ -196,16 +196,6 @@ h1 span {
   margin-bottom: 26px;
 }
 
-.report-thumb {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 80px;
-  height: 76px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
 .report-user {
   display: flex;
   align-items: center;
@@ -217,8 +207,18 @@ h1 span {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  overflow: hidden;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #f1e2b4, #e0c187);
+  border: 2px solid rgba(224, 193, 135, 0.55);
+  box-shadow: 0 0 0 3px rgba(224, 193, 135, 0.18), 0 0 16px rgba(224, 193, 135, 0.55);
+  color: #241f2b;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .report-user-text strong {
@@ -490,7 +490,7 @@ h1 span {
 
 .feature-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   align-items: stretch;
   text-align: left;
@@ -916,10 +916,6 @@ footer {
     min-height: 0;
   }
 
-  .feature-box:empty {
-    min-height: 140px;
-  }
-
   .home-welcome {
     flex-direction: column;
     align-items: flex-start;
@@ -990,13 +986,6 @@ footer {
 
   .report-card {
     padding: 20px 18px;
-  }
-
-  .report-thumb {
-    top: 20px;
-    right: 18px;
-    width: 64px;
-    height: 60px;
   }
 
   .report-text {
