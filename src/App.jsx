@@ -413,6 +413,30 @@ function ReviewsCarousel() {
 }
 
 
+// FEATURES (shown together inside the first box)
+
+const features = [
+  {
+    title: 'Safety Heat Map',
+    text: 'Discover community-reported safety concerns in different areas.',
+    button: 'Explore Map →',
+    page: 'Heat Map'
+  },
+  {
+    title: 'Community',
+    text: 'Share experiences, exchange advice and support one another.',
+    button: 'Join Community →',
+    page: 'Community'
+  },
+  {
+    title: 'Firefly Chat',
+    text: 'Find guidance and practical safety information when you need it.',
+    button: 'Start Chatting →',
+    page: 'Firefly Chat'
+  }
+];
+
+
 // HOME PAGE
 
 function HomePage({ onNavigate }) {
@@ -514,40 +538,26 @@ function HomePage({ onNavigate }) {
         <h2>Your safety, all in one place.</h2>
         <p>Explore the tools that make Firefly possible.</p>
 
-        <div className="feature-grid">
+        <div className="feature-row">
 
-          <div className="feature-card">
-            <span>⌖</span>
-            <h3>Safety Heat Map</h3>
-            <p>
-              Discover community-reported safety concerns in different areas.
-            </p>
-            <button onClick={() => onNavigate('Heat Map')}>
-              Explore Map →
-            </button>
+          {/* BOX 1: all three tools */}
+          <div className="feature-box">
+            {features.map((feature) => (
+              <div className="feature-item" key={feature.title}>
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+                <button onClick={() => onNavigate(feature.page)}>
+                  {feature.button}
+                </button>
+              </div>
+            ))}
           </div>
 
-          <div className="feature-card">
-            <span>♡</span>
-            <h3>Community</h3>
-            <p>
-              Share experiences, exchange advice and support one another.
-            </p>
-            <button onClick={() => onNavigate('Community')}>
-              Join Community →
-            </button>
-          </div>
+          {/* BOX 2: empty, fill in later */}
+          <div className="feature-box"></div>
 
-          <div className="feature-card">
-            <span>✧</span>
-            <h3>Firefly Chat</h3>
-            <p>
-              Find guidance and practical safety information when you need it.
-            </p>
-            <button onClick={() => onNavigate('Firefly Chat')}>
-              Start Chatting →
-            </button>
-          </div>
+          {/* BOX 3: empty, fill in later */}
+          <div className="feature-box"></div>
 
         </div>
       </section>
