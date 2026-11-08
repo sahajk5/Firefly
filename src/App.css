@@ -1,0 +1,172 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #3A2C63;
+  color: #F6F0FF;
+}
+
+.website {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #3A2C63, #1F1A33);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 8%;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo {
+  color: #E0C187;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #F6F0FF;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #BBA8F5;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  padding: 13px 23px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.nav-button {
+  background: transparent;
+  border: 1px solid #93D3B8;
+  color: #93D3B8;
+}
+
+.hero {
+  text-align: center;
+  padding: 115px 20px 90px;
+}
+
+.eyebrow {
+  color: #E0C187;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.15;
+  margin-bottom: 25px;
+}
+
+.hero h1 span {
+  color: #93D3B8;
+}
+
+.hero-description {
+  max-width: 570px;
+  margin: 0 auto 35px;
+  color: #D4CCE9;
+  line-height: 1.8;
+}
+
+.primary-button {
+  background: #3F7A77;
+  color: white;
+}
+
+.primary-button:hover {
+  background: #4B918B;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-top: 85px;
+}
+
+.stats h2 {
+  color: #E0C187;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.stats p {
+  color: #D4CCE9;
+  font-size: 13px;
+}
+
+.feature-section,
+.community-section {
+  text-align: center;
+  padding: 85px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.feature-section h2,
+.community-section h2 {
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+
+.feature-section p,
+.community-section p {
+  color: #D4CCE9;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #E0C187;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 750px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .stats {
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .stats p {
+    font-size: 11px;
+  }
+}
