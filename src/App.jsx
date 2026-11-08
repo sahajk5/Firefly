@@ -1,7 +1,7 @@
 import HeatmapView from './heatmap/HeatmapPage';
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
-import CommunityPage from './Community.jsx';
+//import CommunityPage from './Community.jsx';
 import logo from './assets/firefly-logo.svg';
 import ReactMarkdown from 'react-markdown';
 
